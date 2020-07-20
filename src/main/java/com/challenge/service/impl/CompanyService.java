@@ -4,6 +4,7 @@ import com.challenge.entity.Company;
 import com.challenge.repository.CompanyRepository;
 import com.challenge.service.interfaces.CompanyServiceInterface;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -14,6 +15,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class CompanyService implements CompanyServiceInterface {
+
 
     private CompanyRepository companyRepository;
 
