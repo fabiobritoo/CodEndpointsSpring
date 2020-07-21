@@ -29,12 +29,12 @@ public class CompanyController {
     }
 
     @GetMapping("/byAcceleration/{id}")
-    public List<Company> findByAccelerationId(@PathVariable("id") Long accelerationId) {
+    public List<Company> findByAllByAccelerationId(@PathVariable("id") Long accelerationId) {
         return companyService.findByAccelerationId(accelerationId);
     }
 
     @GetMapping("/byUser/{id}")
-    public List<Company> findByUserId(@PathVariable("id") Long userId) {
+    public List<Company> findAllByUserId(@PathVariable("id") Long userId) {
         return companyService.findByUserId(userId);
     }
 

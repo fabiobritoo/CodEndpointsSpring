@@ -22,18 +22,20 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    Optional<User> findById(@PathVariable("id") Long userId) {
+    public Optional<User> findById(@PathVariable("id") Long userId) {
         return userService.findById(userId);
     }
 
-    @GetMapping("/byAccelerationName/{name}")
-    List<User> findByAccelerationName(@PathVariable("name") String name) {
-        return userService.findByAccelerationName(name);
+    @GetMapping
+    public List<User> findByAccelerationNameOrCompanyId(@RequestParam Optional<String> accelerationName,@RequestParam Optional<Long> companyId)  {
+
+        if(accelerationName.isPresent()) return userService.findByAccelerationName(accelerationName.get());
+        else return companyId.map(aLong -> userService.findByCompanyId(aLong)).orElse(null);
     }
 
-    @GetMapping("/byCompany/{id}")
-    List<User> findByCompanyId(@PathVariable("id") Long companyId) {
-        return userService.findByCompanyId(companyId);
-    }
+//    @GetMapping
+//    public List<User> findByCompanyId(@RequestParam(required = false, name = "companyId") Long companyId) {
+//        return userService.findByCompanyId(companyId);
+//    }
 
 }

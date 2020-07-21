@@ -22,6 +22,7 @@ public class CompanyService implements CompanyServiceInterface {
     public Company save(@Valid @RequestBody Company company){
         return companyRepository.save(company);
     }
+
     @Override
     public Optional<Company> findById(Long id) {
         return companyRepository.findById(id);

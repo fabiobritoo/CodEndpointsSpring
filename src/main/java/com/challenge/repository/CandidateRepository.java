@@ -1,5 +1,6 @@
 package com.challenge.repository;
 
+import com.challenge.dto.CandidateDTO;
 import com.challenge.entity.Candidate;
 import com.challenge.entity.CandidateId;
 import org.springframework.data.jpa.repository.JpaRepository;
