@@ -1,11 +1,9 @@
 package com.challenge.endpoints;
 
 import com.challenge.entity.Acceleration;
-import com.challenge.entity.Submission;
 import com.challenge.service.impl.AccelerationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -31,7 +29,7 @@ public class AccelerationController {
     }
 
     @GetMapping
-    public List<Acceleration> findByCompanyId(@RequestParam(required = true, name = "companyId") Long companyId) {
+    public List<Acceleration> findByCompanyId(@RequestParam Long companyId) {
         return accelerationService.findByCompanyId(companyId);
     }
 

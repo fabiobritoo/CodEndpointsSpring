@@ -2,12 +2,9 @@ package com.challenge.endpoints;
 
 import com.challenge.dto.CandidateDTO;
 import com.challenge.entity.Candidate;
-import com.challenge.entity.Submission;
 import com.challenge.mappers.CandidateMapper;
-import com.challenge.repository.CandidateRepository;
 import com.challenge.service.impl.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +17,7 @@ public class CandidateController {
     @Autowired
     private CandidateService candidateService;
 
+    @Autowired
     private CandidateMapper candidateMapper;
 
     @PostMapping
@@ -28,21 +26,20 @@ public class CandidateController {
     }
 
 
-    @GetMapping(value = "/{userId}/{companyId}/{accelerationId}")
+    @GetMapping(value = "/{userId}/{accelerationId}/{companyId}")
     public Optional<CandidateDTO> findById(@PathVariable Long userId,@PathVariable  Long companyId,@PathVariable Long accelerationId) {
 
         return Optional.of(candidateMapper.map(candidateService.findById(userId, companyId, accelerationId).get()))   ;
     }
 
-    @GetMapping("/byCompany/{companyId}")
-    public List<CandidateDTO> findByCompanyId(@PathVariable Long companyId) {
-        return candidateMapper.map(candidateService.findByCompanyId(companyId));
+    @GetMapping
+    public List<CandidateDTO> findByAccelerationNameOrCompanyId(@RequestParam Optional<Long> companyId, @RequestParam Optional<Long> accelerationId)  {
+
+        if(companyId.isPresent()) return candidateMapper.map(candidateService.findByCompanyId(companyId.get()));
+        else return candidateMapper.map(accelerationId.map(aLong -> candidateService.findByAccelerationId(aLong)).orElse(null));
     }
 
-    @RequestMapping("/byAcceleration/{accelerationId}")
-    public List<CandidateDTO> findByAccelerationId(@PathVariable Long accelerationId) {
-        return candidateMapper.map(candidateService.findByAccelerationId(accelerationId));
-    }
+
 
 
 }

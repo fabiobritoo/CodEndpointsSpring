@@ -1,10 +1,8 @@
 package com.challenge.endpoints;
 
 import com.challenge.entity.Challenge;
-import com.challenge.entity.Submission;
-import com.challenge.repository.ChallengeRepository;
 import com.challenge.service.impl.ChallengeService;
-import org.springframework.data.domain.Pageable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -14,6 +12,7 @@ import java.util.List;
 @RequestMapping("/challenge")
 public class ChallengeController {
 
+    @Autowired
     private ChallengeService challengeService;
 
     @PostMapping
@@ -24,6 +23,11 @@ public class ChallengeController {
 
     @RequestMapping("/{accelerationId}/{userId}")
     public List<Challenge> findByAccelerationIdAndUserId(@PathVariable Long accelerationId, @PathVariable Long userId) {
+        return challengeService.findByAccelerationIdAndUserId(accelerationId, userId);
+    }
+
+    @GetMapping
+    public List<Challenge> findByAccelerationIdOrUserId(@RequestParam Long accelerationId, @RequestParam Long userId)  {
         return challengeService.findByAccelerationIdAndUserId(accelerationId, userId);
     }
 

@@ -33,9 +33,4 @@ public class UserController {
         else return companyId.map(aLong -> userService.findByCompanyId(aLong)).orElse(null);
     }
 
-//    @GetMapping
-//    public List<User> findByCompanyId(@RequestParam(required = false, name = "companyId") Long companyId) {
-//        return userService.findByCompanyId(companyId);
-//    }
-
 }
